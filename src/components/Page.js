@@ -12,15 +12,15 @@ export const Page = ({ children }) => <div>{children}</div>;
 */
 
 Page.Header = ({ children }) => (
-  <section class="section-container section-container--title">
-    <h2 class="section-container__title section-container__title--main">
+  <section className="section-container section-container--title">
+    <h2 className="section-container__title section-container__title--main">
       {children}
     </h2>
   </section>
 );
 
 Page.Header.Action = () => (
-  <div class="page-action">
+  <div className="page-action">
     <Link href="group-create.html">
       <Icons.Add />
       Utwórz grupę
@@ -29,15 +29,15 @@ Page.Header.Action = () => (
 );
 
 Page.Body = ({ children }) => (
-  <section class="section-container section-container--content">
+  <section className="section-container section-container--content">
     {children}
   </section>
 );
 
 Page.Errors = ({ children = [] }) => (
   <div>
-    <section class="section-container section-container--title">
-      <h2 class="section-container__title section-container__title--main">
+    <section className="section-container section-container--title">
+      <h2 className="section-container__title section-container__title--main">
         Wystąpiły błędy
       </h2>
       <pre>{JSON.stringify(children, null, 2)}</pre>

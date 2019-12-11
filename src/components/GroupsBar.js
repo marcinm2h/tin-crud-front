@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "./Link";
 
 export const GroupsBar = ({ items = GroupsBar.defaultItems }) => (
-  <section class="section-container section-container--groups">
-    <div class="groups">
-      <ul class="groups__list">
+  <section className="section-container section-container--groups">
+    <div className="groups">
+      <ul className="groups__list">
         {items.map((item, idx) => (
           <GroupsBar.Item {...item} key={idx} />
         ))}
@@ -14,7 +14,7 @@ export const GroupsBar = ({ items = GroupsBar.defaultItems }) => (
 );
 
 GroupsBar.Item = ({ name, url }) => (
-  <li class="groups__item">
+  <li className="groups__item">
     <Link href={url}>#{name.toUpperCase()}</Link>
   </li>
 );

@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 
 export const Layout = ({ children }) => {
   return (
-    <div class="page-container">
+    <div className="page-container">
       <Header />
       <GroupsBar />
       {children}
