@@ -1,16 +1,17 @@
 import React from "react";
 import * as Icons from "./Icons";
+import { Link } from "./Link";
 
 const Logo = props => (
   <div className="logo">
-    <a href="/">
+    <Link href="/">
       <h1>
         <img
           src="https://via.placeholder.com/125x45/253341"
           alt="Logo strony"
         />
       </h1>
-    </a>
+    </Link>
   </div>
 );
 
@@ -26,16 +27,16 @@ const Menu = ({ items = [] }) => (
 
 Menu.defaultItems = [
   { url: "/", title: "Strona główna", icon: Icons.Home },
-  { url: "/groups", title: "Grupy", icon: Icons.Groups },
+  { url: "/group", title: "Grupy", icon: Icons.Groups },
   { url: "/post-create", title: "Dodaj post", icon: Icons.Add },
   { url: "/login", title: "Konto", icon: Icons.Account }
 ];
 
 Menu.Item = ({ url, title, icon: Icon }) => (
   <li className="menu__item">
-    <a href={url} title={title}>
+    <Link href={url} title={title}>
       <Icon />
-    </a>
+    </Link>
   </li>
 );
 

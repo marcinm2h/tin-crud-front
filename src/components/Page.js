@@ -1,5 +1,6 @@
 import React from "react";
 import * as Icons from "./Icons";
+import { Link } from "./Link";
 
 export const Page = ({ children }) => <div>{children}</div>;
 
@@ -20,10 +21,10 @@ Page.Header = ({ children }) => (
 
 Page.Header.Action = () => (
   <div class="page-action">
-    <a href="group-create.html">
+    <Link href="group-create.html">
       <Icons.Add />
       Utwórz grupę
-    </a>
+    </Link>
   </div>
 );
 

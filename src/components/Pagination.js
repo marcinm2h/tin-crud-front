@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "./Link";
 
 export const Pagination = () => (
   <div class="pagination">
@@ -6,42 +7,42 @@ export const Pagination = () => (
       <div>1</div>
     </div>
     <div class="page-num">
-      <a href="#" class="page-num__link">
+      <Link href="#" class="page-num__link">
         2
-      </a>
+      </Link>
     </div>
     <div class="page-num">
-      <a href="#" class="page-num__link">
+      <Link href="#" class="page-num__link">
         3
-      </a>
+      </Link>
     </div>
     <div class="page-num">
-      <a href="#" class="page-num__link">
+      <Link href="#" class="page-num__link">
         4
-      </a>
+      </Link>
     </div>
     <div class="page-num">
-      <a href="#" class="page-num__link">
+      <Link href="#" class="page-num__link">
         5
-      </a>
+      </Link>
     </div>
     <div class="page-num">
-      <a href="#" class="page-num__link">
+      <Link href="#" class="page-num__link">
         6
-      </a>
+      </Link>
     </div>
     <div class="page-num page-num--elipsis">
       <div>...</div>
     </div>
     <div class="page-num page-num--last">
-      <a href="#" class="page-num__link">
+      <Link href="#" class="page-num__link">
         12
-      </a>
+      </Link>
     </div>
     <div class="page-num page-num--next">
-      <a href="#" class="page-num__link" title="następna strona">
+      <Link href="#" class="page-num__link" title="następna strona">
         🡢
-      </a>
+      </Link>
     </div>
   </div>
 );

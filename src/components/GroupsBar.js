@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "./Link";
 
 export const GroupsBar = ({ items = GroupsBar.defaultItems }) => (
   <section class="section-container section-container--groups">
@@ -14,7 +15,7 @@ export const GroupsBar = ({ items = GroupsBar.defaultItems }) => (
 
 GroupsBar.Item = ({ name, url }) => (
   <li class="groups__item">
-    <a href={url}>#{name.toUpperCase()}</a>
+    <Link href={url}>#{name.toUpperCase()}</Link>
   </li>
 );
 
