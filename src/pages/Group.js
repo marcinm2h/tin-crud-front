@@ -3,7 +3,7 @@ import { Page } from "../components/Page";
 import { Post } from "../components/Post";
 import { Pagination } from "../components/Pagination";
 
-export const Home = ({ errors, data = Home.defaultData, isLoading }) => {
+export const Group = ({ errors, data = Group.defaultData, isLoading }) => {
   if (isLoading) {
     return <Page.Loader />;
   }
@@ -14,7 +14,7 @@ export const Home = ({ errors, data = Home.defaultData, isLoading }) => {
 
   return (
     <Page>
-      <Page.Header>Strona główna</Page.Header>
+      <Page.Header>#PROGRAMOWANIE</Page.Header>
       <Page.Body>
         <Post />
         <Pagination />
