@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import { Home } from "./pages/Home";
 
 export const App = () => {
   return (
     <div>
-      <h1>App</h1>
+      <Home />
     </div>
   );
-}
+};
