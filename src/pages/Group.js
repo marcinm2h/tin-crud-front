@@ -45,7 +45,7 @@ export const Group = () => {
       <Page.Header>#PROGRAMOWANIE</Page.Header>
       <Page.Body>
         <Post />
-        <Pagination />
+        {/* <Pagination /> */}
       </Page.Body>
     </Page>
   );

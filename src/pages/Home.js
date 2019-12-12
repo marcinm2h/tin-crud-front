@@ -17,7 +17,7 @@ export const Home = ({ errors, data = Home.defaultData, isLoading }) => {
       <Page.Header>Strona główna</Page.Header>
       <Page.Body>
         <Post />
-        <Pagination />
+        {/* <Pagination /> */}
       </Page.Body>
     </Page>
   );
