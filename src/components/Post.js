@@ -76,3 +76,13 @@ export const Post = ({
     </div>
   </div>
 );
+
+Post.Empty = () => (
+  <>
+    <h2>Jeszcze nie ma tu zawartośći</h2>
+    <p>
+      Pomóż współtworzyć grupę i dodaj pierwszy post przyciskiem <Icons.Add />{" "}
+      powyżej.
+    </p>
+  </>
+);

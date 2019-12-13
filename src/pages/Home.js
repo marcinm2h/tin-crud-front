@@ -23,7 +23,8 @@ export const Home = () => {
         {data.posts.map(post => (
           <Post key={post.id} {...post} />
         ))}
-        <Pagination />
+        {data.posts.length === 0 ? <Post.Empty /> : null}
+        {data.pages && <Pagination {...data.pages} />}
       </Page.Body>
     </Page>
   );

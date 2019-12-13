@@ -6,7 +6,7 @@ import * as api from "../api/groups";
 import { useData } from "../hooks/useData";
 
 export const Group = ({ groupId }) => {
-  console.log({ groupId});
+  console.log({ groupId });
   const { errors, data, isLoading } = useData(api.details(groupId), [groupId]);
 
   if (isLoading) {
@@ -24,7 +24,8 @@ export const Group = ({ groupId }) => {
         {data.posts.map(post => (
           <Post key={post.id} {...post} />
         ))}
-        <Pagination />
+        {data.posts.length === 0 ? <Post.Empty /> : null}
+        {data.pages && <Pagination {...data.pages} />}
       </Page.Body>
     </Page>
   );
