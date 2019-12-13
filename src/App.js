@@ -8,14 +8,21 @@ import { Group } from "./pages/Group";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { useData } from "./hooks/useData";
-import * as api from "./api/init";
-import * as usersApi from "./api/users";
+
+import * as init from "./api/init";
+import * as users from "./api/users";
+import * as auth from "./api/auth";
 
 if (process.env.NODE_ENV === "development") {
   window.navigate = navigate;
 }
 
-const storage = { state: null, set: () => {} }; //FIXME: localStorage
+const storage = {
+  state: null,
+  set: state => {
+    storage.state = state;
+  }
+}; //FIXME: localStorage
 
 const AppContext = React.createContext({});
 
@@ -31,7 +38,7 @@ export const App = () => {
     },
     login({ user }) {
       app.loading = true;
-      usersApi
+      users
         .details(user.id)()
         .then(({ data }) => {
           app.user = user;
@@ -39,10 +46,21 @@ export const App = () => {
           navigate("/profile");
           app.loading = false;
         });
+    },
+    logout() {
+      app.loading = true;
+      auth
+        .logout()()
+        .then(() => {
+          app.user = null;
+          app.groups = storage.state.groups;
+          navigate("/");
+          app.loading = false;
+        });
     }
   }));
 
-  const { errors, data, isLoading } = useData(api.init(storage.state));
+  const { errors, data, isLoading } = useData(init.init(storage.state));
 
   useEffect(() => {
     if (data) {
