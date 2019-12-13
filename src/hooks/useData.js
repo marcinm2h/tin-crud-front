@@ -11,14 +11,20 @@ export const useData = api => {
 
   useEffect(() => {
     setState({ isLoading: true });
-    api()
-      .then(({ data }) => setState({ isLoading: false, data }))
+
+    (Array.isArray(api)
+      ? Promise.all(api.map(endpoint => endpoint())).then(responses =>
+          responses.reduce((acc, { data }) => [...acc, data], [])
+        )
+      : api().then(({ data }) => data)
+    )
+      .then(data => setState({ isLoading: false, data }))
       .catch(errors => setState({ isLoading: false, errors }));
 
     return () => {
       exists.current = false;
     };
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { errors, data, isLoading };
 };

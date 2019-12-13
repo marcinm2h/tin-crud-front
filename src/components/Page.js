@@ -47,8 +47,9 @@ Page.Errors = ({ children = [] }) => (
   </div>
 );
 
-Page.Loader = props => (
+Page.Loader = ({ children }) => (
   <div className="loader">
     <div className="loader__spinner"></div>
+    <div className="loader__content">{children}</div>
   </div>
 );

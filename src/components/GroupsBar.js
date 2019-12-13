@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "./Link";
 
-export const GroupsBar = ({ items = GroupsBar.defaultItems }) => (
+export const GroupsBar = ({ children: items = GroupsBar.defaultItems }) => (
   <section className="section-container section-container--groups">
     <div className="groups">
       <ul className="groups__list">
