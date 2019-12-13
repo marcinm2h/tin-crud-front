@@ -7,42 +7,22 @@ import { Home } from "./pages/Home";
 import { Group } from "./pages/Group";
 import { Login } from "./pages/Login";
 import { useData } from "./hooks/useData";
+import * as api from "./api/init";
 
 if (process.env.NODE_ENV === "development") {
   window.navigate = navigate;
 }
 
-const groupsApi = {
-  top: () => () =>
-    new Promise(resolve => {
-      setTimeout(resolve, 2000);
-    }).then(() => ({
-      data: {
-        groups: [
-          { name: "programming", url: "group-programming.html" },
-          { name: "gaming", url: "group-programming.html" },
-          { name: "gym", url: "group-programming.html" },
-          { name: "poland", url: "group-programming.html" },
-          { name: "beer", url: "group-programming.html" },
-          { name: "java", url: "group-programming.html" },
-          { name: "ux", url: "group-programming.html" },
-          { name: "design", url: "group-programming.html" },
-          { name: "ios", url: "group-programming.html" },
-          { name: "apple", url: "group-programming.html" },
-          { name: "linux", url: "group-programming.html" }
-        ]
-      }
-    }))
-};
+const storage = { state: null, set: () => {} }; //FIXME: localStorage
 
 export const App = () => {
   const app = useLocalStore(() => ({
     groups: []
   }));
-  const { errors, data, isLoading } = useData([groupsApi.top()]);
+  const { errors, data, isLoading } = useData(api.init(storage.state));
   if (data) {
-    const [groupsData] = data;
-    app.groups = groupsData.groups;
+    storage.set(data);
+    app.groups = data.groups;
   }
 
   return useObserver(() => {
