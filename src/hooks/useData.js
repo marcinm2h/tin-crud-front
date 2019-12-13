@@ -1,16 +1,17 @@
 import { useEffect, useState, useRef } from "react";
 
-export const useData = api => {
+export const useData = (api, deps = []) => {
   const exists = useRef(true);
-  const [{ errors, data, isLoading = true }, set] = useState({});
-  const setState = slice => {
+  exists.current = true;
+  const [{ errors, data, isLoading = true }, setState] = useState({});
+  const update = slice => {
     if (exists.current) {
-      set(state => ({ ...state, ...slice }));
+      setState(state => ({ ...state, ...slice }));
     }
   };
 
   useEffect(() => {
-    setState({ isLoading: true });
+    update({ isLoading: true });
 
     (Array.isArray(api)
       ? Promise.all(api.map(endpoint => endpoint())).then(responses =>
@@ -18,13 +19,14 @@ export const useData = api => {
         )
       : api().then(({ data }) => data)
     )
-      .then(data => setState({ isLoading: false, data }))
-      .catch(errors => setState({ isLoading: false, errors }));
+      .then(data => update({ isLoading: false, data }))
+      .catch(errors => update({ isLoading: false, errors }));
 
     return () => {
+      setState({});
       exists.current = false;
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, deps); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { errors, data, isLoading };
 };

@@ -90,7 +90,7 @@ export const App = () => {
           >
             <Router>
               <Home path="/" />
-              <Group path="group" />
+              <Group path="group/:groupId" />
               <Login path="login" />
               <Profile path="profile" />
             </Router>

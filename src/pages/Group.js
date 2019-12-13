@@ -2,13 +2,12 @@ import React from "react";
 import { Page } from "../components/Page";
 import { Post } from "../components/Post";
 import { Pagination } from "../components/Pagination";
-import * as api from "../api/posts";
+import * as api from "../api/groups";
 import { useData } from "../hooks/useData";
 
-export const Group = () => {
-  const { errors, data = Group.defaultData, isLoading } = useData(
-    api.starWars()
-  );
+export const Group = ({ groupId }) => {
+  console.log({ groupId});
+  const { errors, data, isLoading } = useData(api.details(groupId), [groupId]);
 
   if (isLoading) {
     return <Page.Loader />;
@@ -20,10 +19,11 @@ export const Group = () => {
 
   return (
     <Page>
-      <Page.Header>#PROGRAMOWANIE</Page.Header>
+      <Page.Header>#{data.tag}</Page.Header>
       <Page.Body>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-        <Post />
+        {data.posts.map(post => (
+          <Post key={post.id} {...post} />
+        ))}
         <Pagination />
       </Page.Body>
     </Page>
