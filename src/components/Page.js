@@ -4,6 +4,12 @@ import { Link } from "./Link";
 
 export const Page = ({ children }) => <div>{children}</div>;
 
+Page.Unauthenticated = () => (
+  <Page>
+    <Page.Header>Strona wymaga logowania</Page.Header>
+  </Page>
+);
+
 /*
 <Page.Header>
   Strona główna
