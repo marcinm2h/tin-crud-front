@@ -20,12 +20,12 @@ const formatCommentsNumber = commentsNumber =>
     : `${commentsNumber} komentarze`;
 
 export const Post = ({
-  id,
-  url,
-  description,
-  votesFor,
-  votesAgainst,
-  comments,
+  id = 0,
+  url = "#",
+  description = "Lorem ipsum",
+  votesFor = 0,
+  votesAgainst = 0,
+  comments = [],
   detailsLink = `/post/${id}`,
   editLink = `/post-edit/${id}`,
   removeLink = `/post-edit/${id}`,
