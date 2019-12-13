@@ -1,14 +1,14 @@
 import React from "react";
+import { Group } from "../components/Group";
 import { Page } from "../components/Page";
-import { Post } from "../components/Post";
 import { Pagination } from "../components/Pagination";
 import * as api from "../api/groups";
 import { useData } from "../hooks/useData";
 import { useApp } from "../App";
 
-export const Group = ({ groupId }) => {
+export const Groups = () => {
   const app = useApp();
-  const { errors, data, isLoading } = useData(api.details(groupId), [groupId]);
+  const { errors, data, isLoading } = useData(api.list());
 
   if (isLoading) {
     return <Page.Loader />;
@@ -20,12 +20,15 @@ export const Group = ({ groupId }) => {
 
   return (
     <Page>
-      <Page.Header>#{data.tag}</Page.Header>
+      <Page.Header
+        action={<Page.Header.Action>Utwórz grupę</Page.Header.Action>}
+      >
+        Grupy
+      </Page.Header>
       <Page.Body>
-        {data.posts.map(post => (
-          <Post key={post.id} {...post} isLoggedIn={app.loggedIn} />
+        {data.groups.map(group => (
+          <Group key={group.id} {...group} isLoggedIn={app.loggedIn} />
         ))}
-        {data.posts.length === 0 ? <Post.Empty /> : null}
         {data.pages && <Pagination {...data.pages} />}
       </Page.Body>
     </Page>

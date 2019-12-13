@@ -37,7 +37,7 @@ export const Header = ({ loggedIn }) => {
         <Menu.Item url="/" title="Strona główna">
           <Icons.Home />
         </Menu.Item>
-        <Menu.Item url="/group" title="Grupy">
+        <Menu.Item url="/groups" title="Grupy">
           <Icons.Groups />
         </Menu.Item>
         <Menu.Item url="/post-create" title="Dodaj post">

@@ -29,22 +29,25 @@ export const Post = ({
   detailsLink = `/post/${id}`,
   editLink = `/post-edit/${id}`,
   removeLink = `/post-edit/${id}`,
+  isLoggedIn,
   onVoteFor = () => {},
   onVoteAgainst = () => {}
 }) => (
   <div className="post">
-    <div className="votes post__votes">
-      <div className="votes__arrow">
-        <Vote.For onClick={onVoteFor}>
-          <Icons.ArrowUp />
-        </Vote.For>
+    {isLoggedIn && (
+      <div className="votes post__votes">
+        <div className="votes__arrow">
+          <Vote.For onClick={onVoteFor}>
+            <Icons.ArrowUp />
+          </Vote.For>
+        </div>
+        <div className="votes__arrow">
+          <Vote.Against onClick={onVoteAgainst}>
+            <Icons.ArrowDown />
+          </Vote.Against>
+        </div>
       </div>
-      <div className="votes__arrow">
-        <Vote.Against onClick={onVoteAgainst}>
-          <Icons.ArrowDown />
-        </Vote.Against>
-      </div>
-    </div>
+    )}
     <div className="post__thumb">
       <Link href={url} external>
         <Icons.Placeholder />

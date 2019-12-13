@@ -10,18 +10,12 @@ Page.Unauthenticated = () => (
   </Page>
 );
 
-/*
-<Page.Header>
-  Strona główna
-  <Page.Header.Action>Utwórz grupę</Page.Header.Action>
-</Page.Header>
-*/
-
-Page.Header = ({ children }) => (
+Page.Header = ({ children, action = null }) => (
   <section className="section-container section-container--title">
     <h2 className="section-container__title section-container__title--main">
       {children}
     </h2>
+    {action}
   </section>
 );
 

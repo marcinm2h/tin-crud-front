@@ -5,6 +5,7 @@ import { Router, navigate } from "@reach/router";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Group } from "./pages/Group";
+import { Groups } from "./pages/Groups";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { useData } from "./hooks/useData";
@@ -90,6 +91,7 @@ export const App = () => {
           >
             <Router>
               <Home path="/" />
+              <Groups path="groups" />
               <Group path="group/:groupId" />
               <Login path="login" />
               <Profile path="profile" />

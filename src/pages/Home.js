@@ -4,8 +4,10 @@ import { Post } from "../components/Post";
 import { Pagination } from "../components/Pagination";
 import * as api from "../api/home";
 import { useData } from "../hooks/useData";
+import { useApp } from "../App";
 
 export const Home = () => {
+  const app = useApp();
   const { errors, data, isLoading } = useData(api.home());
 
   if (isLoading) {
@@ -21,7 +23,7 @@ export const Home = () => {
       <Page.Header>Strona główna</Page.Header>
       <Page.Body>
         {data.posts.map(post => (
-          <Post key={post.id} {...post} />
+          <Post key={post.id} {...post} isLoggedIn={app.loggedIn} />
         ))}
         {data.posts.length === 0 ? <Post.Empty /> : null}
         {data.pages && <Pagination {...data.pages} />}
