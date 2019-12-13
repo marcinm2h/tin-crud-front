@@ -10,7 +10,7 @@ const delay = (data, t = DELAY) =>
 const requestFactory = method => (url, data) =>
   axios[method](url, data)
     .then(({ data }) => data)
-    .then(delay);
+    .then(delay, e => delay().then(() => Promise.reject(e)));
 
 export const request = {
   get: requestFactory("get"),

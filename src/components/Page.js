@@ -36,13 +36,19 @@ Page.Body = ({ children }) => (
 
 Page.Errors = ({ children = [] }) => (
   <div>
-    <section className="section-container section-container--title">
-      <h2 className="section-container__title section-container__title--main">
-        Wystąpiły błędy
-      </h2>
-      <pre>{JSON.stringify(children, null, 2)}</pre>
+    <section className="section-container">
+      <h2 className="section-container__title">Wystąpiły błędy</h2>
     </section>
+    {process.env.NODE_ENV === "development" && (
+      <section className="section-container">
+        <pre>{JSON.stringify(children, null, 2)}</pre>
+      </section>
+    )}
   </div>
 );
 
-Page.Loader = props => <div className="loader"><div className="loader__spinner"></div></div>;
+Page.Loader = props => (
+  <div className="loader">
+    <div className="loader__spinner"></div>
+  </div>
+);
