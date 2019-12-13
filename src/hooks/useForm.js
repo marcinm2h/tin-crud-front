@@ -32,6 +32,11 @@ export const useForm = ({ mode = "onBlur", onSubmit, ...rest } = {}) => {
 
   return {
     submitting,
+    setErrors: (errors = {}) => {
+      Object.entries(errors).forEach(([name, errors]) => {
+        form.setError(name, "serverValidation", JSON.stringify(errors));
+      });
+    },
     errors: {
       ...Object.entries(errors).reduce(
         (acc, [name, error]) => ({

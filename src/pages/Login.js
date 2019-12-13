@@ -14,13 +14,13 @@ import { useObserver } from "mobx-react";
 
 export const Login = () => {
   const app = useApp();
-  const { errors, onSubmit, submitting, input } = useForm({
+  const { errors, onSubmit, submitting, setErrors, input } = useForm({
     onSubmit: values =>
       api
         .login(values)()
         .then(({ data, errors }) => {
           if (errors) {
-            // merge errors
+            setErrors(errors);
             return;
           }
           return app.login(data);
