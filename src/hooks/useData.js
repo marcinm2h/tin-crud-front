@@ -12,7 +12,7 @@ export const useData = api => {
   useEffect(() => {
     setState({ isLoading: true });
     api()
-      .then(data => setState({ isLoading: false, data }))
+      .then(({ data }) => setState({ isLoading: false, data }))
       .catch(errors => setState({ isLoading: false, errors }));
 
     return () => {

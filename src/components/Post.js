@@ -1,47 +1,74 @@
 import React from "react";
 import * as Icons from "./Icons";
 import { Link } from "./Link";
+import { Vote } from "./Vote";
 
-export const Post = props => (
+const formatVotes = ({ votesFor, votesAgainst }) => {
+  const score = votesFor - votesAgainst;
+  if (score === 0) {
+    return `${score}`;
+  }
+  if (score > 0) {
+    return `+${score}`;
+  }
+  return `-${score}`;
+};
+
+const formatCommentsNumber = commentsNumber =>
+  commentsNumber === 0
+    ? `Napisz pierwszy komentarz`
+    : `${commentsNumber} komentarze`;
+
+export const Post = ({
+  id,
+  url,
+  description,
+  votesFor,
+  votesAgainst,
+  comments,
+  detailsLink = `/post/${id}`,
+  editLink = `/post-edit/${id}`,
+  removeLink = `/post-edit/${id}`,
+  onVoteFor = () => {},
+  onVoteAgainst = () => {}
+}) => (
   <div className="post">
     <div className="votes post__votes">
       <div className="votes__arrow">
-        <Link href="#">
+        <Vote.For onClick={onVoteFor}>
           <Icons.ArrowUp />
-        </Link>
+        </Vote.For>
       </div>
       <div className="votes__arrow">
-        <Link href="#">
+        <Vote.Against onClick={onVoteAgainst}>
           <Icons.ArrowDown />
-        </Link>
+        </Vote.Against>
       </div>
     </div>
     <div className="post__thumb">
-      <Link href="post.html">
-        <img
-          src="https://via.placeholder.com/130x70/253341"
-          alt="Logo strony"
-        />
+      <Link href={url} external>
+        <Icons.Placeholder />
       </Link>
     </div>
     <div className="post__body post-body">
       <p className="post-body__excerpt">
-        <Link href="post.html">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </Link>
+        <Link href={detailsLink}>{description}</Link>
       </p>
       <div className="post-body__action-bar action-bar">
         <div className="action-bar__score-comments">
-          <Link href="post.html">+123</Link> | <Link href="post.html">32 komentarze</Link>
+          <Link href={detailsLink}>
+            {formatVotes({ votesFor, votesAgainst })}
+          </Link>{" "}
+          |{" "}
+          <Link href={detailsLink}>
+            {formatCommentsNumber(comments.length)}
+          </Link>
         </div>
         <div className="admin action-bar__modify">
-          <Link className="button" href="post-edit.html">
+          <Link className="button" href={editLink}>
             edit
           </Link>
-          <Link className="button" href="post-remove-question.html">
+          <Link className="button" href={removeLink}>
             remove
           </Link>
         </div>

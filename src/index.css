@@ -67,7 +67,7 @@ a:hover {
   align-items: center;
 }
 .page-action i {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .logo h1 {
@@ -180,7 +180,7 @@ a:hover {
 }
 
 .votes__arrow:first-child {
-  margin-bottom: .7rem;
+  margin-bottom: 0.7rem;
   width: 4rem;
   height: 4rem;
 }
@@ -194,7 +194,7 @@ a:hover {
 }
 
 .votes__arrow:last-child a {
-  color: var(--main-bg-color)
+  color: var(--main-bg-color);
 }
 .votes__arrow:last-child a:hover {
   color: var(--action-color);
@@ -216,10 +216,15 @@ a:hover {
   margin: 0;
   font-size: 1.4rem;
   line-height: 2rem;
+  width: 100%;
 }
 .post__body p {
   margin: inherit;
   padding: inherit;
+}
+
+.post-body__excerpt {
+  min-height: 4rem;
 }
 
 .post-body__excerpt a {
@@ -244,7 +249,8 @@ a:hover {
   padding: 1rem;
 }
 
-.page-num--active, .page-num:hover {
+.page-num--active,
+.page-num:hover {
   background: var(--accent-bg-color);
 }
 
@@ -260,6 +266,29 @@ a:hover {
   font-size: 2.4rem;
 }
 
+.vote {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.vote__for {
+  color: var(--action-color);
+}
+
+.vote__against {
+}
+
 .button {
   display: inline-block;
   color: inherit;
@@ -269,7 +298,7 @@ a:hover {
   border: none;
   padding: 1rem;
   border-radius: 2px;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   border: 1px solid var(--accent-bg-color);
   cursor: pointer;
 }
@@ -328,7 +357,7 @@ form[data-invalid] [data-form-error] {
 .field__error {
   color: var(--error-color);
   border: 1px solid;
-  padding: .6rem;
+  padding: 0.6rem;
 }
 
 .form__error {
@@ -358,7 +387,9 @@ form[data-invalid] [data-form-error] {
   padding: 6rem 0;
 }
 
-.poster h2, h3, h4{
+.poster h2,
+h3,
+h4 {
   margin: 0;
 }
 
@@ -377,9 +408,9 @@ form[data-invalid] [data-form-error] {
 .poster__actions {
   display: flex;
   align-items: flex-end;
-  margin-top: 2rem
+  margin-top: 2rem;
 }
-.poster__actions button{
+.poster__actions button {
   width: 12rem;
   margin-left: 2rem;
 }
@@ -409,7 +440,6 @@ form[data-invalid] [data-form-error] {
   margin-right: 1.5rem;
 }
 
-
 .group-action {
   display: flex;
   flex-direction: column;
@@ -432,9 +462,9 @@ form[data-invalid] [data-form-error] {
 }
 
 .group-admin-actions {
-  align-self: center
-/*   margin-top: 1rem; */
-/*   flex: 100%; */
+  align-self: center;
+  /*   margin-top: 1rem; */
+  /*   flex: 100%; */
 }
 
 .group-user {
