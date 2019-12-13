@@ -2,7 +2,12 @@ import React from "react";
 import { Page } from "../components/Page";
 import { Link } from "../components/Link";
 import { Form, Field } from "../components/Form";
-import { useForm } from '../hooks/useForm';
+import { useForm } from "../hooks/useForm";
+import {
+  validateRequired,
+  validateLength,
+  validateStringOrNumber
+} from "../validators";
 
 export const Login = () => {
   const { errors, onSubmit, input } = useForm({
@@ -10,15 +15,17 @@ export const Login = () => {
   });
   const login = input("login", {
     validators: [
-      value => {
-        if (value === "test") {
-          return null;
-        }
-        return "błąd";
-      }
+      validateRequired,
+      value => validateLength(value, { minLength: 3, maxLength: 20 }),
+      validateStringOrNumber
     ]
   });
-  const password = input("password");
+  const password = input("password", {
+    validators: [
+      validateRequired,
+      value => validateLength(value, { minLength: 2 })
+    ]
+  });
 
   return (
     <Page>
