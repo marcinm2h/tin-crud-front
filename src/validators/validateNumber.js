@@ -1,9 +1,6 @@
-const { errors } = require('./errors');
+import { errors } from "./errors";
 
-const validateNumber = value => {
+export const validateNumber = value => {
   return /^\d+$/.test(value) ? null : errors.NUMBER();
 };
 
-module.exports = {
-  validateNumber,
-};

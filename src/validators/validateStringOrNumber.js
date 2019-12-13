@@ -1,9 +1,5 @@
-const { errors } = require('./errors');
+import { errors } from "./errors";
 
-const validateStringOrNumber = value => {
+export const validateStringOrNumber = value => {
   return /^[A-Za-z|\d]+$/.test(value) ? null : errors.STRING_OR_NUMBER();
-};
-
-module.exports = {
-  validateStringOrNumber,
 };

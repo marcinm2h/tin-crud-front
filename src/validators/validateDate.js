@@ -1,7 +1,7 @@
-const { errors } = require('./errors');
+import { errors } from "./errors";
 
 // value: 1993-02-23
-const validateDate = (value, { minDate, maxDate } = {}) => {
+export const validateDate = (value, { minDate, maxDate } = {}) => {
   if (minDate && new Date(value).getTime() < minDate.getTime()) {
     return errors.MIN_DATE(minDate);
   }
@@ -10,8 +10,4 @@ const validateDate = (value, { minDate, maxDate } = {}) => {
   }
 
   return null;
-};
-
-module.exports = {
-  validateDate,
 };

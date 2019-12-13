@@ -1,13 +1,9 @@
-const { errors } = require('./errors');
+import { errors } from "./errors";
 
-const validateRequired = value => {
+export const validateRequired = value => {
   if (value === null || value === undefined || value === '') {
     return errors.REQUIRED();
   }
 
   return null;
-};
-
-module.exports = {
-  validateRequired,
 };

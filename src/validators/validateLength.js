@@ -1,6 +1,6 @@
-const { errors } = require('./errors');
+import { errors } from "./errors";
 
-const validateLength = (value, { minLength, maxLength } = {}) => {
+export const validateLength = (value, { minLength, maxLength } = {}) => {
   if (minLength && value.length < minLength) {
     return errors.MIN_LENGTH(minLength);
   }
@@ -11,6 +11,3 @@ const validateLength = (value, { minLength, maxLength } = {}) => {
   return null;
 };
 
-module.exports = {
-  validateLength,
-};
