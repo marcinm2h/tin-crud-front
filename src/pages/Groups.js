@@ -21,6 +21,7 @@ export const Groups = () => {
   return (
     <Page>
       <Page.Header
+        isLoggedIn={app.loggedIn}
         action={<Page.Header.Action>Utwórz grupę</Page.Header.Action>}
       >
         Grupy

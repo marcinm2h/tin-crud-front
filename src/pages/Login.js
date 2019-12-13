@@ -10,7 +10,6 @@ import {
 } from "../validators";
 import { useApp } from "../App";
 import * as api from "../api/auth";
-import { useObserver } from "mobx-react";
 
 export const Login = () => {
   const app = useApp();
@@ -42,7 +41,7 @@ export const Login = () => {
     ]
   });
 
-  return useObserver(() => (
+  return (
     <Page>
       <Page.Header>Zaloguj się</Page.Header>
       <Page.Body>
@@ -71,5 +70,5 @@ export const Login = () => {
         </Form>
       </Page.Body>
     </Page>
-  ));
+  );
 };

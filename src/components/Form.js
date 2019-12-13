@@ -59,9 +59,13 @@ Field.Label = ({ ...props }) => <label className="field__label" {...props} />;
 
 Field.Label.componentName = Symbol("Field.Label");
 
-Field.Input = React.forwardRef((props, ref) => (
-  <input className="field__input" ref={ref} {...props} />
-));
+Field.Input = React.forwardRef(({ textArea, ...props }, ref) =>
+  textArea ? (
+    <textarea className="field__input" ref={ref} {...props} />
+  ) : (
+    <input className="field__input" ref={ref} {...props} />
+  )
+);
 
 Field.Input.componentName = Symbol("Field.Input");
 

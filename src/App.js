@@ -5,6 +5,8 @@ import { Router, navigate } from "@reach/router";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Group } from "./pages/Group";
+import { GroupCreate } from "./pages/GroupCreate";
+import { GroupCreateSuccess } from "./pages/GroupCreateSuccess";
 import { Groups } from "./pages/Groups";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
@@ -37,6 +39,9 @@ export const App = () => {
     get loggedIn() {
       return Boolean(app.user);
     },
+    navigate(...args) {
+      return navigate(...args);
+    },
     login({ user }) {
       app.loading = true;
       users
@@ -44,7 +49,7 @@ export const App = () => {
         .then(({ data }) => {
           app.user = user;
           app.groups = data.user.groupsIn;
-          navigate("/profile");
+          app.navigate("/profile");
           app.loading = false;
         });
     },
@@ -55,7 +60,7 @@ export const App = () => {
         .then(() => {
           app.user = null;
           app.groups = storage.state.groups;
-          navigate("/");
+          app.navigate("/");
           app.loading = false;
         });
     }
@@ -93,6 +98,8 @@ export const App = () => {
               <Home path="/" />
               <Groups path="groups" />
               <Group path="group/:groupId" />
+              <GroupCreate path="group-create" />
+              <GroupCreateSuccess path="group-create-success/:groupId" />
               <Login path="login" />
               <Profile path="profile" />
             </Router>

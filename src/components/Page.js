@@ -10,18 +10,18 @@ Page.Unauthenticated = () => (
   </Page>
 );
 
-Page.Header = ({ children, action = null }) => (
+Page.Header = ({ children, isLoggedIn, action = null }) => (
   <section className="section-container section-container--title">
     <h2 className="section-container__title section-container__title--main">
       {children}
     </h2>
-    {action}
+    {isLoggedIn && action}
   </section>
 );
 
 Page.Header.Action = () => (
   <div className="page-action">
-    <Link href="group-create.html">
+    <Link href="/group-create">
       <Icons.Add />
       Utwórz grupę
     </Link>

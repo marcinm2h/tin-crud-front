@@ -1,7 +1,8 @@
 import React from "react";
 import { Page } from "../components/Page";
-import { useApp } from "../App";
+import { Poster } from "../components/Poster";
 import { Button } from "../components/Button";
+import { useApp } from "../App";
 
 export const Profile = () => {
   const app = useApp();
@@ -13,7 +14,11 @@ export const Profile = () => {
     <Page>
       <Page.Header>Witaj, {app.user.login}!</Page.Header>
       <Page.Body>
-        <Button onClick={app.logout}>Wyloguj się</Button>
+        <Poster>
+          <Poster.Subtitle>
+            <Button onClick={app.logout}>Wyloguj się</Button>
+          </Poster.Subtitle>
+        </Poster>
       </Page.Body>
     </Page>
   );
