@@ -22,6 +22,7 @@ export const Group = () => {
     <Page>
       <Page.Header>#PROGRAMOWANIE</Page.Header>
       <Page.Body>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
         <Post />
         <Pagination />
       </Page.Body>

@@ -18,7 +18,7 @@ export const useData = api => {
     return () => {
       exists.current = false;
     };
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return { errors, data, isLoading };
 };
