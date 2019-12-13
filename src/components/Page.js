@@ -45,4 +45,4 @@ Page.Errors = ({ children = [] }) => (
   </div>
 );
 
-Page.Loader = props => <div>Trwa wczytywanie...</div>;
+Page.Loader = props => <div className="loader"><div className="loader__spinner"></div></div>;

@@ -457,3 +457,38 @@ form[data-invalid] [data-form-error] {
 .group-user-action__icon i {
   font-size: 3.2rem;
 }
+
+.loader {
+  min-width: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader__spinner {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.loader__spinner:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: rotate 1.2s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
