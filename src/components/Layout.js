@@ -3,13 +3,22 @@ import { GroupsBar } from "./GroupsBar";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
-export const Layout = ({ children, groups }) => {
+export const Layout = ({ children, groups, loggedIn, loading }) => {
   return (
-    <div className="page-container">
-      <Header />
-      <GroupsBar>{groups}</GroupsBar>
-      {children}
-      <Footer />
+    <div className="loader">
+      {loading && <div className="form__spinner loader__spinner"></div>}
+      <div className={`page-container layout`}>
+        <Header loggedIn={loggedIn} />
+        <GroupsBar>{groups}</GroupsBar>
+        <div
+          className={`layout__content ${
+            loading ? "layout__content--loading" : ""
+          }`}
+        >
+          {children}
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 };

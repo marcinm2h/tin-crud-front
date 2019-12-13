@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocalStore, useObserver } from "mobx-react";
 import { Router, navigate } from "@reach/router";
 
@@ -8,6 +8,7 @@ import { Group } from "./pages/Group";
 import { Login } from "./pages/Login";
 import { useData } from "./hooks/useData";
 import * as api from "./api/init";
+import * as usersApi from "./api/users";
 
 if (process.env.NODE_ENV === "development") {
   window.navigate = navigate;
@@ -15,15 +16,39 @@ if (process.env.NODE_ENV === "development") {
 
 const storage = { state: null, set: () => {} }; //FIXME: localStorage
 
+const AppContext = React.createContext({});
+
+export const useApp = () => useContext(AppContext);
+
 export const App = () => {
   const app = useLocalStore(() => ({
-    groups: []
+    groups: [],
+    user: null,
+    loading: false,
+    get loggedIn() {
+      return Boolean(app.user);
+    },
+    login({ user }) {
+      app.loading = true;
+      usersApi
+        .details(user.id)()
+        .then(({ data }) => {
+          app.user = user;
+          app.groups = data.user.groupsIn;
+          navigate("/profile");
+          app.loading = false;
+        });
+    }
   }));
+
   const { errors, data, isLoading } = useData(api.init(storage.state));
-  if (data) {
-    storage.set(data);
-    app.groups = data.groups;
-  }
+
+  useEffect(() => {
+    if (data) {
+      storage.set(data);
+      app.groups = data.groups;
+    }
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return useObserver(() => {
     if (isLoading) {
@@ -37,15 +62,21 @@ export const App = () => {
     }
 
     return (
-      <div>
-        <Layout groups={app.groups}>
-          <Router>
-            <Home path="/" />
-            <Group path="group" />
-            <Login path="login" />
-          </Router>
-        </Layout>
-      </div>
+      <>
+        <AppContext.Provider value={app}>
+          <Layout
+            groups={app.groups}
+            loggedIn={app.loggedIn}
+            loading={app.loading}
+          >
+            <Router>
+              <Home path="/" />
+              <Group path="group" />
+              <Login path="login" />
+            </Router>
+          </Layout>
+        </AppContext.Provider>
+      </>
     );
   });
 };

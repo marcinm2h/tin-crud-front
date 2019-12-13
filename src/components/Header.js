@@ -15,36 +15,44 @@ const Logo = props => (
   </div>
 );
 
-const Menu = ({ items = [] }) => (
+const Menu = ({ children }) => (
   <nav clas="menu">
-    <ul className="menu__list">
-      {items.map((item, idx) => (
-        <Menu.Item {...item} key={idx} />
-      ))}
-    </ul>
+    <ul className="menu__list">{children}</ul>
   </nav>
 );
 
-Menu.defaultItems = [
-  { url: "/", title: "Strona główna", icon: Icons.Home },
-  { url: "/group", title: "Grupy", icon: Icons.Groups },
-  { url: "/post-create", title: "Dodaj post", icon: Icons.Add },
-  { url: "/login", title: "Konto", icon: Icons.Account }
-];
-
-Menu.Item = ({ url, title, icon: Icon }) => (
+Menu.Item = ({ url, title, children }) => (
   <li className="menu__item">
     <Link href={url} title={title}>
-      <Icon />
+      {children}
     </Link>
   </li>
 );
 
-export const Header = ({ menuItems = Menu.defaultItems }) => {
+export const Header = ({ loggedIn }) => {
   return (
     <header className="section-container section-container--header">
       <Logo />
-      <Menu items={menuItems} />
+      <Menu>
+        <Menu.Item url="/" title="Strona główna">
+          <Icons.Home />
+        </Menu.Item>
+        <Menu.Item url="/group" title="Grupy">
+          <Icons.Groups />
+        </Menu.Item>
+        <Menu.Item url="/post-create" title="Dodaj post">
+          <Icons.Add />
+        </Menu.Item>
+        {loggedIn ? (
+          <Menu.Item url="/profile" title="Profil">
+            <Icons.Profile />
+          </Menu.Item>
+        ) : (
+          <Menu.Item url="/login" title="Konto">
+            <Icons.Account />
+          </Menu.Item>
+        )}
+      </Menu>
     </header>
   );
 };

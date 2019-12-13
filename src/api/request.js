@@ -2,7 +2,7 @@ import axios from "axios";
 
 const DELAY = process.env.NODE_ENV === "development" ? 300 : 0;
 
-const delay = (data, t = DELAY) =>
+export const delay = (data, t = DELAY) =>
   new Promise(resolve => {
     setTimeout(() => resolve(data), t);
   });

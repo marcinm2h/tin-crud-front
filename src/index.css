@@ -316,8 +316,20 @@ a:hover {
   flex-direction: column;
 }
 
+.form--submitting {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 .form form {
   width: 100%;
+}
+
+.form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
 }
 
 .form__field {
@@ -488,6 +500,14 @@ h4 {
   font-size: 3.2rem;
 }
 
+.layout {}
+
+.layout__content {}
+
+.layout__content--loading {
+  opacity: 0.2;
+}
+
 .loader {
   min-width: 100%;
   min-height: 300px;
@@ -501,6 +521,10 @@ h4 {
   display: inline-block;
   width: 80px;
   height: 80px;
+}
+
+.form__spinner {
+  position: absolute;
 }
 
 .loader__spinner:after {

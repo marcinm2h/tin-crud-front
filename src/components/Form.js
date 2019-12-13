@@ -2,7 +2,14 @@ import React, { useState, Fragment } from "react";
 
 const uuid = () => `field-${Math.random()}`;
 
-export const Form = props => <form className="form" {...props} />;
+export const Form = ({ submitting, children, ...props }) => (
+  <div className="loader">
+    {submitting && <div className="form__spinner loader__spinner"></div>}
+    <form className={`form ${submitting ? "form--submitting" : ""}`} {...props}>
+      <fieldset disabled={submitting}>{children}</fieldset>
+    </form>
+  </div>
+);
 
 Form.Errors = props => (
   <div className="form__error">

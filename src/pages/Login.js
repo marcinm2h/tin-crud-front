@@ -8,11 +8,25 @@ import {
   validateLength,
   validateStringOrNumber
 } from "../validators";
+import { useApp } from "../App";
+import * as api from "../api/auth";
+import { useObserver } from "mobx-react";
 
 export const Login = () => {
-  const { errors, onSubmit, input } = useForm({
-    onSubmit: values => console.log("submit", { values })
+  const app = useApp();
+  const { errors, onSubmit, submitting, input } = useForm({
+    onSubmit: values =>
+      api
+        .login(values)()
+        .then(({ data, errors }) => {
+          if (errors) {
+            // merge errors
+            return;
+          }
+          return app.login(data);
+        })
   });
+
   const login = input("login", {
     validators: [
       validateRequired,
@@ -20,6 +34,7 @@ export const Login = () => {
       validateStringOrNumber
     ]
   });
+
   const password = input("password", {
     validators: [
       validateRequired,
@@ -27,11 +42,11 @@ export const Login = () => {
     ]
   });
 
-  return (
+  return useObserver(() => (
     <Page>
       <Page.Header>Zaloguj się</Page.Header>
       <Page.Body>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} submitting={submitting}>
           <Field>
             <Field.Label>Login*</Field.Label>
             <Field.Input {...login} />
@@ -56,5 +71,5 @@ export const Login = () => {
         </Form>
       </Page.Body>
     </Page>
-  );
+  ));
 };
