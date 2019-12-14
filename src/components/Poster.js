@@ -1,5 +1,6 @@
 import React from "react";
 import * as Icons from "./Icons";
+import { Button } from "./Button";
 
 export const Poster = ({ children, icon = null }) => (
   <div className="poster">
@@ -21,3 +22,9 @@ Poster.Title = ({ children }) => (
     <h3>{children}</h3>
   </div>
 );
+
+Poster.Actions = ({ ...props }) => (
+  <div className="poster__actions" {...props} />
+);
+
+Poster.Actions.Button = ({ ...props }) => <Button {...props} />;

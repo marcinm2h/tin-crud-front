@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 import { Group } from "./pages/Group";
 import { GroupCreate } from "./pages/GroupCreate";
 import { GroupCreateSuccess } from "./pages/GroupCreateSuccess";
+import { GroupRemove } from "./pages/GroupRemove";
 import { Groups } from "./pages/Groups";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
@@ -41,6 +42,14 @@ export const App = () => {
     loading: false,
     get loggedIn() {
       return Boolean(app.user);
+    },
+    updateGroups() {
+      return init
+        .init()()
+        .then(({ data }) => {
+          storage.set(data);
+          app.groups = data.groups;
+        });
     },
     navigate(...args) {
       return navigate(...args);
@@ -118,6 +127,7 @@ export const App = () => {
                 <Group path="group/:groupId" />
                 <GroupCreate path="group-create" />
                 <GroupCreateSuccess path="group-create-success/:groupId" />
+                <GroupRemove path="group-remove/:groupId" />
                 <PostCreate path="post-create" />
               </Router>
             </Layout>
