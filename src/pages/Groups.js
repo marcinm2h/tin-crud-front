@@ -21,14 +21,13 @@ export const Groups = () => {
   return (
     <Page>
       <Page.Header
-        isLoggedIn={app.loggedIn}
         action={<Page.Header.Action>Utwórz grupę</Page.Header.Action>}
       >
         Grupy
       </Page.Header>
       <Page.Body>
         {data.groups.map(group => (
-          <Group key={group.id} {...group} isLoggedIn={app.loggedIn} />
+          <Group key={group.id} {...group} />
         ))}
         {data.pages && <Pagination {...data.pages} />}
       </Page.Body>

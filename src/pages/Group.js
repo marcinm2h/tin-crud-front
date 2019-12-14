@@ -23,7 +23,7 @@ export const Group = ({ groupId }) => {
       <Page.Header>#{data.tag}</Page.Header>
       <Page.Body>
         {data.posts.map(post => (
-          <Post key={post.id} {...post} isLoggedIn={app.loggedIn} />
+          <Post key={post.id} {...post} />
         ))}
         {data.posts.length === 0 ? <Post.Empty /> : null}
         {data.pages && <Pagination {...data.pages} />}

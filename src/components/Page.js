@@ -1,6 +1,7 @@
 import React from "react";
 import * as Icons from "./Icons";
 import { Link } from "./Link";
+import { useRole } from "./RoleContext";
 
 export const Page = ({ children }) => <div>{children}</div>;
 
@@ -10,14 +11,19 @@ Page.Unauthenticated = () => (
   </Page>
 );
 
-Page.Header = ({ children, isLoggedIn, action = null }) => (
-  <section className="section-container section-container--title">
-    <h2 className="section-container__title section-container__title--main">
-      {children}
-    </h2>
-    {isLoggedIn && action}
-  </section>
-);
+const PageHeader = ({ children, action = null }) => {
+  const role = useRole();
+  return (
+    <section className="section-container section-container--title">
+      <h2 className="section-container__title section-container__title--main">
+        {children}
+      </h2>
+      {role.user && action}
+    </section>
+  );
+};
+
+Page.Header = PageHeader;
 
 Page.Header.Action = () => (
   <div className="page-action">

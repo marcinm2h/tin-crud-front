@@ -3,6 +3,7 @@ import * as Icons from "./Icons";
 import { Poster } from "./Poster";
 import { Link } from "./Link";
 import { Vote } from "./Vote";
+import { useRole } from "./RoleContext";
 
 const formatVotes = ({ votesFor, votesAgainst }) => {
   const score = votesFor - votesAgainst;
@@ -30,56 +31,60 @@ export const Post = ({
   detailsLink = `/post/${id}`,
   editLink = `/post-edit/${id}`,
   removeLink = `/post-edit/${id}`,
-  isLoggedIn,
   onVoteFor = () => {},
   onVoteAgainst = () => {}
-}) => (
-  <div className="post">
-    {isLoggedIn && (
-      <div className="votes post__votes">
-        <div className="votes__arrow">
-          <Vote.For onClick={onVoteFor}>
-            <Icons.ArrowUp />
-          </Vote.For>
+}) => {
+  const role = useRole();
+  return (
+    <div className="post">
+      {role.user && (
+        <div className="votes post__votes">
+          <div className="votes__arrow">
+            <Vote.For onClick={onVoteFor}>
+              <Icons.ArrowUp />
+            </Vote.For>
+          </div>
+          <div className="votes__arrow">
+            <Vote.Against onClick={onVoteAgainst}>
+              <Icons.ArrowDown />
+            </Vote.Against>
+          </div>
         </div>
-        <div className="votes__arrow">
-          <Vote.Against onClick={onVoteAgainst}>
-            <Icons.ArrowDown />
-          </Vote.Against>
+      )}
+      <div className="post__thumb">
+        <Link href={url} external>
+          <Icons.Placeholder />
+        </Link>
+      </div>
+      <div className="post__body post-body">
+        <p className="post-body__excerpt">
+          <Link href={detailsLink}>{description}</Link>
+        </p>
+        <div className="post-body__action-bar action-bar">
+          <div className="action-bar__score-comments">
+            <Link href={detailsLink}>
+              {formatVotes({ votesFor, votesAgainst })}
+            </Link>{" "}
+            |{" "}
+            <Link href={detailsLink}>
+              {formatCommentsNumber(comments.length)}
+            </Link>
+          </div>
+          {role.admin && (
+            <div className="action-bar__modify">
+              <Link className="button" href={editLink}>
+                edit
+              </Link>
+              <Link className="button" href={removeLink}>
+                remove
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-    )}
-    <div className="post__thumb">
-      <Link href={url} external>
-        <Icons.Placeholder />
-      </Link>
     </div>
-    <div className="post__body post-body">
-      <p className="post-body__excerpt">
-        <Link href={detailsLink}>{description}</Link>
-      </p>
-      <div className="post-body__action-bar action-bar">
-        <div className="action-bar__score-comments">
-          <Link href={detailsLink}>
-            {formatVotes({ votesFor, votesAgainst })}
-          </Link>{" "}
-          |{" "}
-          <Link href={detailsLink}>
-            {formatCommentsNumber(comments.length)}
-          </Link>
-        </div>
-        <div className="admin action-bar__modify">
-          <Link className="button" href={editLink}>
-            edit
-          </Link>
-          <Link className="button" href={removeLink}>
-            remove
-          </Link>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 Post.Empty = () => (
   <Poster>

@@ -3,6 +3,7 @@ import { useLocalStore, useObserver } from "mobx-react";
 import { Router, navigate } from "@reach/router";
 
 import { Layout } from "./components/Layout";
+import { RoleContext } from "./components/RoleContext";
 import { Home } from "./pages/Home";
 import { Group } from "./pages/Group";
 import { GroupCreate } from "./pages/GroupCreate";
@@ -42,6 +43,11 @@ export const App = () => {
     },
     navigate(...args) {
       return navigate(...args);
+    },
+    loginAdmin({ admin }) {
+      app.admin = true;
+      app.user = admin;
+      app.navigate("/");
     },
     login({ user }) {
       app.loading = true;
@@ -90,22 +96,30 @@ export const App = () => {
     return (
       <>
         <AppContext.Provider value={app}>
-          <Layout
-            groups={app.groups}
-            loggedIn={app.loggedIn}
-            loading={app.loading}
+          <RoleContext.Provider
+            value={{
+              admin: app.admin,
+              user: app.loggedIn
+            }}
           >
-            <Router>
-              <Home path="/" />
-              <Login path="login" />
-              <Profile path="profile" />
-              <Groups path="groups" />
-              <Group path="group/:groupId" />
-              <GroupCreate path="group-create" />
-              <GroupCreateSuccess path="group-create-success/:groupId" />
-              <PostCreate path="post-create" />
-            </Router>
-          </Layout>
+            <Layout
+              groups={app.groups}
+              loggedIn={app.loggedIn}
+              loading={app.loading}
+            >
+              <Router>
+                <Home path="/" />
+                <Login path="login" />
+                <Login path="login-admin" asAdmin />
+                <Profile path="profile" />
+                <Groups path="groups" />
+                <Group path="group/:groupId" />
+                <GroupCreate path="group-create" />
+                <GroupCreateSuccess path="group-create-success/:groupId" />
+                <PostCreate path="post-create" />
+              </Router>
+            </Layout>
+          </RoleContext.Provider>
         </AppContext.Provider>
       </>
     );

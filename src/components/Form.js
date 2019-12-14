@@ -11,12 +11,9 @@ export const Form = ({ submitting, children, ...props }) => (
   </div>
 );
 
-Form.Errors = props => (
-  <div className="form__error">
-    Wystąpiły błędy formularza. Aby kontynuować dodawanie postu popraw błędne
-    pola.
-  </div>
-);
+Form.Errors = ({
+  children = "Wystąpiły błędy formularza. Aby kontynuować dodawanie postu popraw błędne pola."
+}) => <div className="form__error">{children}</div>;
 
 Form.Info = props => <div className="form__info" {...props} />;
 

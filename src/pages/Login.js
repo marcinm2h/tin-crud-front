@@ -10,19 +10,20 @@ import {
 } from "../validators";
 import { useApp } from "../App";
 import * as api from "../api/auth";
+import { useRole } from "../components/RoleContext";
 
-export const Login = () => {
+export const Login = ({ asAdmin }) => {
   const app = useApp();
   const { errors, onSubmit, submitting, setErrors, input } = useForm({
     onSubmit: values =>
       api
-        .login(values)()
+        .login(values, { asAdmin })()
         .then(({ data, errors }) => {
           if (errors) {
             setErrors(errors);
             return;
           }
-          return app.login(data);
+          return asAdmin ? app.loginAdmin(data) : app.login(data);
         })
   });
 
@@ -43,7 +44,7 @@ export const Login = () => {
 
   return (
     <Page>
-      <Page.Header>Zaloguj się</Page.Header>
+      <Page.Header>Zaloguj się{asAdmin && " (admin)"}</Page.Header>
       <Page.Body>
         <Form onSubmit={onSubmit} submitting={submitting}>
           <Field>
@@ -64,7 +65,10 @@ export const Login = () => {
             <Link href="/register">Nie masz jeszcze konta? Kliknij tutaj.</Link>
           </Form.Info>
 
-          {!errors.empty && <Form.Errors />}
+          {errors.password && (
+            <Field.Errors>{errors.password.array}</Field.Errors>
+          )}
+          {!errors.empty && <Form.Errors>{errors.form.array[0]}</Form.Errors>}
 
           <Form.Submit />
         </Form>
