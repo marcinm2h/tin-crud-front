@@ -34,18 +34,25 @@ export const Group = ({
   );
 };
 
-Group.Join = ({ url }) => (
-  <div className="group__action group-action">
-    <div className="group-action__icon">
-      <Link href={url}>
-        <Icons.Add />
-      </Link>
+const GroupJoin = ({ url }) => {
+  const role = useRole();
+  return (
+    <div className="group__action group-action">
+      <div className="group-action__icon">
+        <Link href={url}>
+          <Icons.Add />
+        </Link>
+      </div>
+      {role.user && (
+        <div className="group-action__text">
+          <Link href={url}>dołącz</Link>
+        </div>
+      )}
     </div>
-    <div className="group-action__text">
-      <Link href={url}>dołącz</Link>
-    </div>
-  </div>
-);
+  );
+};
+
+Group.Join = GroupJoin;
 
 Group.AdminActions = ({ removeUrl, editUrl, usersUrl }) => (
   <div className="group__admin-actions group-admin-actions">

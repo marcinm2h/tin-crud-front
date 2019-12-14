@@ -1,6 +1,7 @@
 import React from "react";
 import * as Icons from "./Icons";
 import { Link } from "./Link";
+import { useRole } from "./RoleContext";
 
 const Logo = props => (
   <div className="logo">
@@ -30,6 +31,7 @@ Menu.Item = ({ url, title, children }) => (
 );
 
 export const Header = ({ loggedIn }) => {
+  const role = useRole();
   return (
     <header className="section-container section-container--header">
       <Logo />
@@ -40,9 +42,11 @@ export const Header = ({ loggedIn }) => {
         <Menu.Item url="/groups" title="Grupy">
           <Icons.Groups />
         </Menu.Item>
-        <Menu.Item url="/post-create" title="Dodaj post">
-          <Icons.Add />
-        </Menu.Item>
+        {role.user && (
+          <Menu.Item url="/post-create" title="Dodaj post">
+            <Icons.Add />
+          </Menu.Item>
+        )}
         {loggedIn ? (
           <Menu.Item url="/profile" title="Profil">
             <Icons.Profile />

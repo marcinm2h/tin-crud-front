@@ -25,11 +25,11 @@ const PageHeader = ({ children, action = null }) => {
 
 Page.Header = PageHeader;
 
-Page.Header.Action = () => (
+Page.Header.Action = ({ children, href }) => (
   <div className="page-action">
-    <Link href="/group-create">
+    <Link href={href}>
       <Icons.Add />
-      Utwórz grupę
+      { children }
     </Link>
   </div>
 );
