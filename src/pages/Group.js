@@ -4,10 +4,8 @@ import { Post } from "../components/Post";
 import { Pagination } from "../components/Pagination";
 import * as api from "../api/groups";
 import { useData } from "../hooks/useData";
-import { useApp } from "../App";
 
 export const Group = ({ groupId }) => {
-  const app = useApp();
   const { errors, data, isLoading } = useData(api.details(groupId), [groupId]);
 
   if (isLoading) {

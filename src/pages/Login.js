@@ -10,7 +10,6 @@ import {
 } from "../validators";
 import { useApp } from "../App";
 import * as api from "../api/auth";
-import { useRole } from "../components/RoleContext";
 
 export const Login = ({ asAdmin }) => {
   const app = useApp();

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "./Link";
 import { Vote } from "./Vote";
 import * as Icons from "./Icons";
 import { useRole } from "./RoleContext";
