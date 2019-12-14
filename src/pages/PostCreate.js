@@ -17,7 +17,7 @@ export const PostCreate = () => {
             setErrors(errors);
             return;
           }
-          return app.navigate(`/post-create-success/${data.group.id}`);
+          return app.navigate(`/post/${data.post.id}`);
         })
   });
   const url = input("url", {
