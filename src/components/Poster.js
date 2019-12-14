@@ -13,6 +13,10 @@ Poster.Success = ({ ...props }) => (
   <Poster icon={<Icons.ThumbUp />} {...props} />
 );
 
+Poster.Question = ({ ...props }) => (
+  <Poster icon={<Icons.QuestionMark />} {...props} />
+);
+
 Poster.Subtitle = ({ children }) => (
   <div className="poster__tagline">{children}</div>
 );

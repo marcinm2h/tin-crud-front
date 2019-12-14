@@ -30,7 +30,7 @@ export const GroupRemove = ({ groupId }) => {
     <Page>
       <Page.Header>Czy na pewno chcesz usunąć grupę?</Page.Header>
       <Page.Body>
-        <Poster.Success>
+        <Poster.Question>
           <Poster.Actions>
             <Poster.Actions.Button onClick={() => app.navigate("/groups")}>
               Nie
@@ -39,7 +39,7 @@ export const GroupRemove = ({ groupId }) => {
               Tak
             </Poster.Actions.Button>
           </Poster.Actions>
-        </Poster.Success>
+        </Poster.Question>
       </Page.Body>
     </Page>
   );
