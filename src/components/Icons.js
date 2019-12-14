@@ -5,7 +5,7 @@ export const Groups = () => <i className="material-icons">people</i>;
 export const Add = () => <i className="material-icons">add_circle_outline</i>;
 export const Account = () => <i className="material-icons">account_circle</i>;
 export const Profile = () => <i className="material-icons">person_outline</i>;
-export const ThumbUp = () => <i class="material-icons">thumb_up</i>;
+export const ThumbUp = () => <i className="material-icons">thumb_up</i>;
 export const ArrowUp = () => (
   <i className="material-icons">keyboard_arrow_up</i>
 );

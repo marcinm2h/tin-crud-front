@@ -10,6 +10,7 @@ import { GroupCreateSuccess } from "./pages/GroupCreateSuccess";
 import { Groups } from "./pages/Groups";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
+import { PostCreate } from "./pages/PostCreate";
 import { useData } from "./hooks/useData";
 
 import * as init from "./api/init";
@@ -96,12 +97,13 @@ export const App = () => {
           >
             <Router>
               <Home path="/" />
+              <Login path="login" />
+              <Profile path="profile" />
               <Groups path="groups" />
               <Group path="group/:groupId" />
               <GroupCreate path="group-create" />
               <GroupCreateSuccess path="group-create-success/:groupId" />
-              <Login path="login" />
-              <Profile path="profile" />
+              <PostCreate path="post-create" />
             </Router>
           </Layout>
         </AppContext.Provider>

@@ -2,16 +2,11 @@ import React from "react";
 import { Page } from "../components/Page";
 import { Form, Field } from "../components/Form";
 import { useForm } from "../hooks/useForm";
-import {
-  validateRequired,
-  validateLength,
-  validateStringOrNumber,
-  validateString
-} from "../validators";
+import { validateRequired, validateLength, validateUrl } from "../validators";
 import { useApp } from "../App";
-import * as api from "../api/groups";
+import * as api from "../api/posts";
 
-export const GroupCreate = () => {
+export const PostCreate = () => {
   const app = useApp();
   const { errors, onSubmit, submitting, setErrors, input } = useForm({
     onSubmit: values =>
@@ -22,22 +17,14 @@ export const GroupCreate = () => {
             setErrors(errors);
             return;
           }
-          app.groups = [...app.groups, data.group];
-          return app.navigate(`/group-create-success/${data.group.id}`);
+          return app.navigate(`/post-create-success/${data.group.id}`);
         })
   });
-  const name = input("name", {
+  const url = input("url", {
     validators: [
       validateRequired,
-      value => validateLength(value, { minLength: 3, maxLength: 100 }),
-      validateString
-    ]
-  });
-  const tag = input("tag", {
-    validators: [
-      validateRequired,
-      value => validateLength(value, { minLength: 3, maxLength: 50 }),
-      validateStringOrNumber
+      validateUrl,
+      value => validateLength(value, { minLength: 4, maxLength: 50 })
     ]
   });
   const description = input("description", {
@@ -46,6 +33,9 @@ export const GroupCreate = () => {
       value => validateLength(value, { minLength: 20, maxLength: 200 })
     ]
   });
+  const groupId = input("groupId", {
+    validators: [validateRequired]
+  });
 
   if (!app.loggedIn) {
     return <Page.Unauthenticated />;
@@ -53,27 +43,32 @@ export const GroupCreate = () => {
 
   return (
     <Page>
-      <Page.Header>Utwórz grupę</Page.Header>
+      <Page.Header>Dodaj post</Page.Header>
       <Page.Body>
         <Form onSubmit={onSubmit} submitting={submitting}>
           <Field>
-            <Field.Label>Nazwa*</Field.Label>
-            <Field.Input {...name} />
-            {errors.name && <Field.Errors>{errors.name.array}</Field.Errors>}
-          </Field>
-
-          <Field>
-            <Field.Label>Tag*</Field.Label>
-            <Field.Input {...tag} />
-            {errors.tag && <Field.Errors>{errors.tag.array}</Field.Errors>}
+            <Field.Label>Link*</Field.Label>
+            <Field.Input {...url} />
+            {errors.url && <Field.Errors>{errors.url.array}</Field.Errors>}
           </Field>
 
           <Field>
             <Field.Label>Opis*</Field.Label>
-            <Field.Input {...description} textArea rows="10" />
+            <Field.Input textArea rows="10" {...description} />
             {errors.description && (
               <Field.Errors>{errors.description.array}</Field.Errors>
             )}
+          </Field>
+
+          <Field>
+            <Field.Label>Grupa*</Field.Label>
+            <select {...groupId}>
+              {app.groups.map(group => (
+                <option value={group.id} key={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
           </Field>
 
           {!errors.empty && <Form.Errors />}

@@ -1,5 +1,6 @@
 import React from "react";
 import * as Icons from "./Icons";
+import { Poster } from "./Poster";
 import { Link } from "./Link";
 import { Vote } from "./Vote";
 
@@ -81,11 +82,11 @@ export const Post = ({
 );
 
 Post.Empty = () => (
-  <>
-    <h2>Jeszcze nie ma tu zawartośći</h2>
-    <p>
+  <Poster>
+    <Poster.Title>Jeszcze nie ma tu zawartośći</Poster.Title>
+    <Poster.Subtitle>
       Pomóż współtworzyć grupę i dodaj pierwszy post przyciskiem <Icons.Add />{" "}
       powyżej.
-    </p>
-  </>
+    </Poster.Subtitle>
+  </Poster>
 );
