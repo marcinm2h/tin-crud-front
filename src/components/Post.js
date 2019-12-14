@@ -24,6 +24,7 @@ const formatCommentsNumber = commentsNumber =>
 export const Post = ({
   id = 0,
   url = "#",
+  details = false,
   description = "Lorem ipsum",
   votesFor = 0,
   votesAgainst = 0,
@@ -58,18 +59,26 @@ export const Post = ({
       </div>
       <div className="post__body post-body">
         <p className="post-body__excerpt">
-          <Link href={detailsLink}>{description}</Link>
+          {details ? (
+            <Link external href={url}>
+              {description} (link)
+            </Link>
+          ) : (
+            <Link href={detailsLink}>{description}</Link>
+          )}
         </p>
         <div className="post-body__action-bar action-bar">
-          <div className="action-bar__score-comments">
-            <Link href={detailsLink}>
-              {formatVotes({ votesFor, votesAgainst })}
-            </Link>{" "}
-            |{" "}
-            <Link href={detailsLink}>
-              {formatCommentsNumber(comments.length)}
-            </Link>
-          </div>
+          {!details && (
+            <div className="action-bar__score-comments">
+              <Link href={detailsLink}>
+                {formatVotes({ votesFor, votesAgainst })}
+              </Link>{" "}
+              |{" "}
+              <Link href={detailsLink}>
+                {formatCommentsNumber(comments.length)}
+              </Link>
+            </div>
+          )}
           {role.admin && (
             <div className="action-bar__modify">
               <Link className="button" href={editLink}>

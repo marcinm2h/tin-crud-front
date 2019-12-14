@@ -10,6 +10,7 @@ export const Group = ({
   name,
   description,
   tag,
+  groupUrl = `/group/${id}`,
   joinUrl = `/group-join/${id}`,
   removeUrl = `/group-remove/${id}`,
   editUrl = `/group-edit/${id}`,
@@ -20,7 +21,9 @@ export const Group = ({
     <div className="group">
       {role.user && <Group.Join url={joinUrl} />}
       <div className="group__content group-content">
-        <div className="group-content__title">{formatTag(tag)}</div>
+        <div className="group-content__title">
+          <Link href={groupUrl}>{formatTag(tag)}</Link>
+        </div>
         <div className="group-content__tagline">{description}</div>
       </div>
       {role.admin && (

@@ -11,6 +11,7 @@ import { GroupCreateSuccess } from "./pages/GroupCreateSuccess";
 import { Groups } from "./pages/Groups";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
+import { Post } from "./pages/Post";
 import { PostCreate } from "./pages/PostCreate";
 import { useData } from "./hooks/useData";
 
@@ -112,6 +113,7 @@ export const App = () => {
                 <Login path="login" />
                 <Login path="login-admin" asAdmin />
                 <Profile path="profile" />
+                <Post path="post/:postId" />
                 <Groups path="groups" />
                 <Group path="group/:groupId" />
                 <GroupCreate path="group-create" />
