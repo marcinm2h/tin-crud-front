@@ -18,13 +18,13 @@ export const Group = ({ groupId }) => {
 
   return (
     <Page>
-      <Page.Header>#{data.tag}</Page.Header>
+      <Page.Header>#{data.group.tag}</Page.Header>
       <Page.Body>
-        {data.posts.map(post => (
+        {data.group.posts.map(post => (
           <Post key={post.id} {...post} />
         ))}
-        {data.posts.length === 0 ? <Post.Empty /> : null}
-        {data.pages && <Pagination {...data.pages} />}
+        {data.group.posts.length === 0 ? <Post.Empty /> : null}
+        {data.group.pages && <Pagination {...data.group.pages} />}
       </Page.Body>
     </Page>
   );

@@ -19,6 +19,8 @@ import { useData } from "./hooks/useData";
 import * as init from "./api/init";
 import * as users from "./api/users";
 import * as auth from "./api/auth";
+import { GroupEdit } from "./pages/GroupEdit";
+import { GroupEditSuccess } from "./pages/GroupEditSuccess";
 
 if (process.env.NODE_ENV === "development") {
   window.navigate = navigate;
@@ -127,6 +129,8 @@ export const App = () => {
                 <Group path="group/:groupId" />
                 <GroupCreate path="group-create" />
                 <GroupCreateSuccess path="group-create-success/:groupId" />
+                <GroupEdit path="group-edit/:groupId" />
+                <GroupEditSuccess path="group-edit-success/:groupId" />
                 <GroupRemove path="group-remove/:groupId" />
                 <PostCreate path="post-create" />
               </Router>
