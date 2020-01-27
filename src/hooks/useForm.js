@@ -10,7 +10,7 @@ export const useForm = ({ mode = "onBlur", onSubmit, ...rest } = {}) => {
   const { errors, handleSubmit, ...form } = useFormHook({
     mode
   });
-  const register = ({ validators, ...rest }) =>
+  const register = ({ validators, ...rest } = {}) =>
     form.register({
       validate: value => {
         if (__SKIP_VALIDATION__) {
@@ -72,6 +72,14 @@ export const useForm = ({ mode = "onBlur", onSubmit, ...rest } = {}) => {
     input: (name, { validators } = {}) => ({
       name,
       ref: register({ validators })
+    }),
+    select: (name, { fields }) => ({
+      name,
+      ref: register(),
+      fields: fields.map(([value, displayName]) => ({
+        value,
+        displayName
+      }))
     })
   };
 };

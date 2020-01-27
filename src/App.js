@@ -14,6 +14,8 @@ import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { Post } from "./pages/Post";
 import { PostCreate } from "./pages/PostCreate";
+import { Register } from "./pages/Register";
+import { RegisterSuccess } from "./pages/RegisterSuccess";
 import { useData } from "./hooks/useData";
 
 import * as init from "./api/init";
@@ -122,6 +124,8 @@ export const App = () => {
               <Router>
                 <Home path="/" />
                 <Login path="login" />
+                <Register path="register" />
+                <RegisterSuccess path="register-success" />
                 <Login path="login-admin" asAdmin />
                 <Profile path="profile" />
                 <Post path="post/:postId" />

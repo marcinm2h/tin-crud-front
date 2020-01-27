@@ -67,7 +67,7 @@ export const Login = ({ asAdmin }) => {
           {errors.password && (
             <Field.Errors>{errors.password.array}</Field.Errors>
           )}
-          {!errors.empty && <Form.Errors>{errors.form.array[0]}</Form.Errors>}
+          {!errors.empty && <Form.Errors />}
 
           <Form.Submit />
         </Form>
