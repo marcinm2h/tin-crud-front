@@ -18,13 +18,7 @@ export const Groups = () => {
 
   return (
     <Page>
-      <Page.Header
-        action={
-          <Page.Header.Action href="/group-create">
-            Utwórz grupę
-          </Page.Header.Action>
-        }
-      >
+      <Page.Header>
         Grupy
       </Page.Header>
       <Page.Body>

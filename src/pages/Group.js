@@ -18,7 +18,7 @@ export const Group = ({ groupId }) => {
 
   return (
     <Page>
-      <Page.Header>#{data.group.tag}</Page.Header>
+      <Page.Header>{data.group.name}</Page.Header>
       <Page.Body>
         {data.group.posts.map(post => (
           <Post key={post.id} {...post} />

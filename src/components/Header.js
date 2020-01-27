@@ -51,15 +51,20 @@ export const Header = ({ loggedIn }) => {
             <Icons.Add />
           </Menu.Item>
         )}
+        {role.user && (
+          <Menu.Item url="/group-create" title="Utwórz grupę">
+            <Icons.Add />
+          </Menu.Item>
+        )}
         {loggedIn ? (
           <Menu.Item url="/profile" title="Profil">
             <Icons.Profile />
           </Menu.Item>
         ) : (
-          <Menu.Item url="/login" title="Zaloguj się">
-            <Icons.Account />
-          </Menu.Item>
-        )}
+            <Menu.Item url="/login" title="Zaloguj się">
+              <Icons.Account />
+            </Menu.Item>
+          )}
       </Menu>
     </header>
   );

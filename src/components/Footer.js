@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Footer = props => (
+export const Footer = props => process.env.FEATURE_FOOTER ? (
   <footer className="section-container section-container--footer">
     <section className="footer-section">
       <h2 className="footer-section__title">Policy</h2>
@@ -18,4 +18,4 @@ export const Footer = props => (
       </p>
     </section>
   </footer>
-);
+) : null;
