@@ -2,13 +2,16 @@ import React from "react";
 import * as Icons from "./Icons";
 import { Link } from "./Link";
 import { useRole } from "./RoleContext";
+import logo from "../assets/logo.png"
 
 const Logo = props => (
   <div className="logo">
     <Link href="/">
       <h1>
         <img
-          src="https://via.placeholder.com/125x45/253341"
+          // src="https://via.placeholder.com/125x45/253341"
+          src={logo}
+          width="140"
           alt="Logo strony"
         />
       </h1>
@@ -26,6 +29,7 @@ Menu.Item = ({ url, title, children }) => (
   <li className="menu__item">
     <Link href={url} title={title}>
       {children}
+      <span>{title}</span>
     </Link>
   </li>
 );
@@ -52,7 +56,7 @@ export const Header = ({ loggedIn }) => {
             <Icons.Profile />
           </Menu.Item>
         ) : (
-          <Menu.Item url="/login" title="Konto">
+          <Menu.Item url="/login" title="Zaloguj się">
             <Icons.Account />
           </Menu.Item>
         )}
