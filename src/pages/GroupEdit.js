@@ -26,8 +26,11 @@ export const GroupEdit = ({ groupId }) => {
             setErrors(errors);
             return;
           }
-          app.groups = app.groups.filter(group => group.id !== groupId);
-          return app.navigate(`/group-edit-success/${groupId}`);
+          app.loading = true;
+          app.updateGroups().then(() => {
+            app.loading = false;
+            return app.navigate(`/group-edit-success/${groupId}`);
+          });
         })
   });
   const name = input("name", {

@@ -1,3 +1,2 @@
-- ekran rejestracji
 - głosowanie
 - pisanie komentarzy
