@@ -7,13 +7,10 @@ import { useRole } from "./RoleContext";
 
 const formatVotes = ({ votesFor, votesAgainst }) => {
   const score = votesFor - votesAgainst;
-  if (score === 0) {
-    return `${score}`;
-  }
   if (score > 0) {
     return `+${score}`;
   }
-  return `-${score}`;
+  return `${score}`;
 };
 
 const formatCommentsNumber = commentsNumber =>

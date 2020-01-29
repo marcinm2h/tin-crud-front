@@ -10,13 +10,15 @@ export const useData = (api, deps = []) => {
     }
   };
 
+  const updateData = (updater = () => ({})) => update({ data: { ...data, ...updater(data) } });
+
   useEffect(() => {
     update({ isLoading: true });
 
     (Array.isArray(api)
       ? Promise.all(api.map(endpoint => endpoint())).then(responses =>
-          responses.reduce((acc, { data }) => [...acc, data], [])
-        )
+        responses.reduce((acc, { data }) => [...acc, data], [])
+      )
       : api().then(({ data }) => data)
     )
       .then(data => update({ isLoading: false, data }))
@@ -28,5 +30,5 @@ export const useData = (api, deps = []) => {
     };
   }, deps); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { errors, data, isLoading };
+  return { errors, data, isLoading, updateData };
 };
