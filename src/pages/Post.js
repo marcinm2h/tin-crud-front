@@ -6,7 +6,39 @@ import * as api from "../api/posts";
 import { useData } from "../hooks/useData";
 
 export const Post = ({ postId }) => {
-  const { errors, data, isLoading } = useData(api.details(postId));
+  const { errors, data, isLoading, updateData } = useData(api.details(postId));
+
+  const onVoteFor = (id) => {
+    api.vote(id, 'for')().then(({ data, errors }) => {
+      if (errors) {
+        throw (errors);
+      }
+      updateData(({ post }) => {
+        return {
+          post: {
+            ...post,
+            votesFor: data.post.votesFor,
+          }
+        }
+      })
+    }).catch((e) => alert(e));
+  }
+
+  const onVoteAgainst = (id) => {
+    api.vote(id, 'against')().then(({ data, errors }) => {
+      if (errors) {
+        throw errors;
+      }
+      updateData(({ post }) => {
+        return {
+          post: {
+            ...post,
+            votesAgainst: data.post.votesAgainst,
+          }
+        }
+      })
+    }).catch((e) => alert(e));
+  }
 
   if (isLoading) {
     return <Page.Loader />;
@@ -20,7 +52,10 @@ export const Post = ({ postId }) => {
     <Page>
       <Page.Header>Post</Page.Header>
       <Page.Body>
-        <PostComponent details {...data.post} />
+        <PostComponent details {...data.post}
+          onVoteAgainst={() => onVoteAgainst(data.post.id)}
+          onVoteFor={() => onVoteFor(data.post.id)}
+        />
         {data.post.comments.map(comment => (
           <Comment key={comment.id} {...comment} />
         ))}

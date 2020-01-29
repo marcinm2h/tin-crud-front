@@ -8,9 +8,9 @@ import { useRole } from "./RoleContext";
 const formatVotes = ({ votesFor, votesAgainst }) => {
   const score = votesFor - votesAgainst;
   if (score > 0) {
-    return `+${score}`;
+    return `+${score} (+${votesFor} / -${votesAgainst})`;
   }
-  return `${score}`;
+  return `${score} (+${votesFor} / -${votesAgainst})`;
 };
 
 const formatCommentsNumber = commentsNumber =>
@@ -65,17 +65,22 @@ export const Post = ({
             )}
         </p>
         <div className="post-body__action-bar action-bar">
-          {!details && (
+          {details ? (
             <div className="action-bar__score-comments">
-              <Link href={detailsLink}>
-                {formatVotes({ votesFor, votesAgainst })}
-              </Link>{" "}
+              {formatVotes({ votesFor, votesAgainst })}{" "}
               |{" "}
-              <Link href={detailsLink}>
-                {formatCommentsNumber(comments.length)}
-              </Link>
-            </div>
-          )}
+              {formatCommentsNumber(comments.length)}
+            </div>) : (
+              <div className="action-bar__score-comments">
+                <Link href={detailsLink}>
+                  {formatVotes({ votesFor, votesAgainst })}
+                </Link>{" "}
+                |{" "}
+                <Link href={detailsLink}>
+                  {formatCommentsNumber(comments.length)}
+                </Link>
+              </div>
+            )}
           {role.admin && (
             <Post.AdminActions
               removeUrl={removeUrl}
