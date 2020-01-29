@@ -22,7 +22,7 @@ export const Group = ({
       {role.user && <Group.Join url={joinUrl} />}
       <div className="group__content group-content">
         <div className="group-content__title">
-          <Link href={groupUrl}>{name} ({formatTag(tag)})</Link>
+          <Link href={groupUrl}>{name} {formatTag(tag)}</Link>
         </div>
         <div className="group-content__tagline">{description}</div>
       </div>

@@ -114,7 +114,7 @@ export const Register = () => {
             </select>
           </Field>
 
-          {!errors.empty && <Form.Errors />}
+          {!errors.empty && <Form.Errors>{errors.form && errors.form.array && errors.form.array[0]}</Form.Errors>}
 
           <Form.Submit />
         </Form>

@@ -60,14 +60,15 @@ export const Login = ({ asAdmin }) => {
             )}
           </Field>
 
-          <Form.Info>
+          {!asAdmin && <Form.Info>
             <Link href="/register">Nie masz jeszcze konta? Kliknij tutaj.</Link>
-          </Form.Info>
+          </Form.Info>}
 
           {errors.password && (
             <Field.Errors>{errors.password.array}</Field.Errors>
           )}
-          {!errors.empty && <Form.Errors />}
+
+          {!errors.empty && <Form.Errors>{errors.form && errors.form.array && errors.form.array[0]}</Form.Errors>}
 
           <Form.Submit />
         </Form>

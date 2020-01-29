@@ -20,7 +20,7 @@ export const GroupEdit = ({ groupId }) => {
   const { errors, onSubmit, submitting, setErrors, input } = useForm({
     onSubmit: values =>
       api
-        .edit(groupId,values)()
+        .edit(groupId, values)()
         .then(({ data, errors }) => {
           if (errors) {
             setErrors(errors);
@@ -96,7 +96,8 @@ export const GroupEdit = ({ groupId }) => {
             )}
           </Field>
 
-          {!errors.empty && <Form.Errors />}
+          {!errors.empty && <Form.Errors>{errors.form && errors.form.array && errors.form.array[0]}</Form.Errors>}
+
 
           <Form.Submit />
         </Form>
