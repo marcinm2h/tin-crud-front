@@ -10,6 +10,7 @@ import { GroupCreate } from "./pages/GroupCreate";
 import { GroupCreateSuccess } from "./pages/GroupCreateSuccess";
 import { GroupRemove } from "./pages/GroupRemove";
 import { Groups } from "./pages/Groups";
+import { GroupUsers } from "./pages/GroupUsers";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { Post } from "./pages/Post";
@@ -137,6 +138,7 @@ export const App = () => {
                 <PostEditSuccess path="post-edit-success/:postId" />
                 <Groups path="groups" />
                 <Group path="group/:groupId" />
+                <GroupUsers path="group-users/:groupId" />
                 <GroupCreate path="group-create" />
                 <GroupCreateSuccess path="group-create-success/:groupId" />
                 <GroupEdit path="group-edit/:groupId" />
