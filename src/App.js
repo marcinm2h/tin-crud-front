@@ -13,6 +13,7 @@ import { Groups } from "./pages/Groups";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { Post } from "./pages/Post";
+import { PostRemove } from "./pages/PostRemove";
 import { PostCreate } from "./pages/PostCreate";
 import { Register } from "./pages/Register";
 import { RegisterSuccess } from "./pages/RegisterSuccess";
@@ -129,6 +130,7 @@ export const App = () => {
                 <Login path="login-admin" asAdmin />
                 <Profile path="profile" />
                 <Post path="post/:postId" />
+                <PostRemove path="post-remove/:postId" />
                 <Groups path="groups" />
                 <Group path="group/:groupId" />
                 <GroupCreate path="group-create" />

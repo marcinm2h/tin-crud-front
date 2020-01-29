@@ -2,24 +2,20 @@ import React, { useState } from "react";
 import { Link } from "../components/Link";
 import { Page } from "../components/Page";
 import { Poster } from "../components/Poster";
-import * as api from "../api/groups";
+import * as api from "../api/posts";
 import { useApp } from "../App";
 
-export const GroupRemove = ({ groupId }) => {
+export const PostRemove = ({ postId }) => {
   const app = useApp();
   const [success, setSuccess] = useState(false);
   const remove = () =>
     api
-      .remove(groupId)()
+      .remove(postId)()
       .then(({ errors }) => {
         if (errors) {
           return;
         }
-        app.loading = true;
-        app.updateGroups().then(() => {
-          app.loading = false;
-          setSuccess(true);
-        });
+        setSuccess(true);
       });
 
   if (success) {
@@ -28,11 +24,11 @@ export const GroupRemove = ({ groupId }) => {
 
   return (
     <Page>
-      <Page.Header>Czy na pewno chcesz usunąć grupę?</Page.Header>
+      <Page.Header>Czy na pewno chcesz usunąć post?</Page.Header>
       <Page.Body>
         <Poster.Question>
           <Poster.Actions>
-            <Poster.Actions.Button onClick={() => app.navigate("/groups")}>
+            <Poster.Actions.Button onClick={() => app.navigate("/")}>
               Nie
             </Poster.Actions.Button>
             <Poster.Actions.Button onClick={() => remove()}>
@@ -51,9 +47,9 @@ const Success = () => {
       <Page.Header>Sukces</Page.Header>
       <Page.Body>
         <Poster.Success>
-          <Poster.Title>Pomyślnie usunięto grupę</Poster.Title>
+          <Poster.Title>Pomyślnie usunięto post</Poster.Title>
           <Poster.Subtitle>
-            Kliknij <Link href={`/groups`}>tu</Link> by wrócić na stronę grup.
+            Kliknij <Link href={`/`}>tu</Link> wrócić na stronę główną.
           </Poster.Subtitle>
         </Poster.Success>
       </Page.Body>

@@ -30,10 +30,10 @@ export const Post = ({
   votesAgainst = 0,
   comments = [],
   detailsLink = `/post/${id}`,
-  editLink = `/post-edit/${id}`,
-  removeLink = `/post-edit/${id}`,
-  onVoteFor = () => {},
-  onVoteAgainst = () => {}
+  editUrl = `/post-edit/${id}`,
+  removeUrl = `/post-remove/${id}`,
+  onVoteFor = () => { },
+  onVoteAgainst = () => { }
 }) => {
   const role = useRole();
   return (
@@ -64,8 +64,8 @@ export const Post = ({
               {description} (link)
             </Link>
           ) : (
-            <Link href={detailsLink}>{description}</Link>
-          )}
+              <Link href={detailsLink}>{description}</Link>
+            )}
         </p>
         <div className="post-body__action-bar action-bar">
           {!details && (
@@ -80,20 +80,27 @@ export const Post = ({
             </div>
           )}
           {role.admin && (
-            <div className="action-bar__modify">
-              <Link className="button" href={editLink}>
-                edit
-              </Link>
-              <Link className="button" href={removeLink}>
-                remove
-              </Link>
-            </div>
+            <Post.AdminActions
+              removeUrl={removeUrl}
+              editUrl={editUrl}
+            />
           )}
         </div>
       </div>
     </div>
   );
 };
+
+Post.AdminActions = ({ removeUrl, editUrl }) => (
+  <div className="post__admin-actions post-admin-actions action-bar__modify">
+    <Link className="button" href={removeUrl}>
+      remove
+    </Link>
+    <Link className="button" href={editUrl}>
+      edit
+    </Link>
+  </div>
+);
 
 Post.Empty = () => (
   <Poster>
