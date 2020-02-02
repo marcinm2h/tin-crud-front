@@ -8,9 +8,9 @@ import { useRole } from "./RoleContext";
 const formatVotes = ({ votesFor, votesAgainst }) => {
   const score = votesFor - votesAgainst;
   if (score > 0) {
-    return `+${score} (+${votesFor} / -${votesAgainst})`;
+    return `+${score}`;
   }
-  return `${score} (+${votesFor} / -${votesAgainst})`;
+  return `${score}`;
 };
 
 const formatCommentsNumber = commentsNumber =>
@@ -29,6 +29,8 @@ export const Post = ({
   detailsLink = `/post/${id}`,
   editUrl = `/post-edit/${id}`,
   removeUrl = `/post-remove/${id}`,
+  author,
+  creationDate,
   onVoteFor = () => { },
   onVoteAgainst = () => { }
 }) => {
@@ -69,7 +71,9 @@ export const Post = ({
             <div className="action-bar__score-comments">
               {formatVotes({ votesFor, votesAgainst })}{" "}
               |{" "}
-              {formatCommentsNumber(comments.length)}
+              {formatCommentsNumber(comments.length)} | {" "}
+              @{author.login} | {" "}
+              {creationDate}
             </div>) : (
               <div className="action-bar__score-comments">
                 <Link href={detailsLink}>

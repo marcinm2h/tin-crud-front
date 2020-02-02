@@ -73,7 +73,9 @@ export const App = () => {
         .details(user.id)()
         .then(({ data }) => {
           app.user = user;
-          app.groups = data.user.groupsIn;
+          if (data.user.groups.length > 0) {
+            app.groups = data.user.groups;
+          }
           app.navigate("/profile");
           app.loading = false;
         });

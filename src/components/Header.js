@@ -46,12 +46,12 @@ export const Header = ({ loggedIn }) => {
         <Menu.Item url="/groups" title="Grupy">
           <Icons.Groups />
         </Menu.Item>
-        {role.user && (
+        {role.user && !role.admin && (
           <Menu.Item url="/post-create" title="Dodaj post">
             <Icons.Add />
           </Menu.Item>
         )}
-        {role.user && (
+        {role.user && !role.admin && (
           <Menu.Item url="/group-create" title="Utwórz grupę">
             <Icons.Add />
           </Menu.Item>

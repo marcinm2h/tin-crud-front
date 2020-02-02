@@ -46,7 +46,7 @@ const GroupJoin = ({ url }) => {
           <Icons.Add />
         </Link>
       </div>
-      {role.user && (
+      {role.user && !role.admin && (
         <div className="group-action__text">
           <Link href={url}>dołącz</Link>
         </div>
