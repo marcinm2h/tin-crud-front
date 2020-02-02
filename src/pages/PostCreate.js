@@ -30,7 +30,7 @@ export const PostCreate = () => {
   const description = input("description", {
     validators: [
       validateRequired,
-      value => validateLength(value, { minLength: 20, maxLength: 200 })
+      value => validateLength(value, { minLength: 8, maxLength: 200 })
     ]
   });
   const groupId = input("groupId", {
