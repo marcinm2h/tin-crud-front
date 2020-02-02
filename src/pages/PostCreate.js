@@ -24,7 +24,7 @@ export const PostCreate = () => {
     validators: [
       validateRequired,
       validateUrl,
-      value => validateLength(value, { minLength: 4, maxLength: 50 })
+      value => validateLength(value, { minLength: 4, maxLength: 256 })
     ]
   });
   const description = input("description", {
