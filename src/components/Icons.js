@@ -3,6 +3,7 @@ import React from "react";
 export const Home = () => <i className="material-icons">home</i>;
 export const Groups = () => <i className="material-icons">people</i>;
 export const Add = () => <i className="material-icons">add_circle_outline</i>;
+export const Remove = () => <i className="material-icons">remove</i>;
 export const Account = () => <i className="material-icons">face</i>;
 export const Profile = () => <i className="material-icons">person_outline</i>;
 export const QuestionMark = () => <i className="material-icons">help</i>;

@@ -11,6 +11,8 @@ import { GroupCreateSuccess } from "./pages/GroupCreateSuccess";
 import { GroupRemove } from "./pages/GroupRemove";
 import { Groups } from "./pages/Groups";
 import { GroupUsers } from "./pages/GroupUsers";
+import { GroupJoin } from "./pages/GroupJoin";
+import { GroupLeave } from "./pages/GroupLeave";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 import { Post } from "./pages/Post";
@@ -69,26 +71,28 @@ export const App = () => {
     },
     login({ user }) {
       app.loading = true;
+      app.admin = false;
       users
         .details(user.id)()
         .then(({ data }) => {
           app.user = user;
-          if (data.user.groups.length > 0) {
-            app.groups = data.user.groups;
-          }
-          app.navigate("/profile");
-          app.loading = false;
+          app.updateGroups().then(() => {
+            app.navigate("/profile");
+            app.loading = false;
+          })
         });
     },
     logout() {
       app.loading = true;
+      app.admin = false;
       auth
         .logout()()
         .then(() => {
           app.user = null;
-          app.groups = storage.state.groups;
-          app.navigate("/");
-          app.loading = false;
+          app.updateGroups().then(() => {
+            app.navigate("/");
+            app.loading = false;
+          });
         });
     }
   }));
@@ -145,6 +149,8 @@ export const App = () => {
                 <GroupCreateSuccess path="group-create-success/:groupId" />
                 <GroupEdit path="group-edit/:groupId" />
                 <GroupEditSuccess path="group-edit-success/:groupId" />
+                <GroupJoin path="group-join/:groupId" />
+                <GroupLeave path="group-leave/:groupId" />
                 <GroupRemove path="group-remove/:groupId" />
                 <PostCreate path="post-create" />
               </Router>

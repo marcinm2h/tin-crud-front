@@ -10,8 +10,10 @@ export const Group = ({
   name,
   description,
   tag,
+  joined = false,
   groupUrl = `/group/${id}`,
   joinUrl = `/group-join/${id}`,
+  leaveUrl = `/group-leave/${id}`,
   removeUrl = `/group-remove/${id}`,
   editUrl = `/group-edit/${id}`,
   usersUrl = `/group-users/${id}`
@@ -19,7 +21,7 @@ export const Group = ({
   const role = useRole();
   return (
     <div className="group">
-      {role.user && <Group.Join url={joinUrl} />}
+      {role.user && joined ? <Group.Leave url={leaveUrl} /> : <Group.Join url={joinUrl} />}
       <div className="group__content group-content">
         <div className="group-content__title">
           <Link href={groupUrl}>{name} {formatTag(tag)}</Link>
@@ -40,22 +42,41 @@ export const Group = ({
 const GroupJoin = ({ url }) => {
   const role = useRole();
   return (
-    <div className="group__action group-action">
-      <div className="group-action__icon">
-        <Link href={url}>
-          <Icons.Add />
-        </Link>
-      </div>
-      {role.user && !role.admin && (
+    role.user && !role.admin && (
+      <div className="group__action group-action">
+        <div className="group-action__icon">
+          <Link href={url}>
+            <Icons.Add />
+          </Link>
+        </div>
         <div className="group-action__text">
           <Link href={url}>dołącz</Link>
         </div>
-      )}
-    </div>
+      </div>
+    )
+  );
+};
+const GroupLeave = ({ url }) => {
+  const role = useRole();
+  return (
+    role.user && !role.admin && (
+      <div className="group__action group-action">
+        <div className="group-action__icon">
+          <Link href={url}>
+            <Icons.Remove />
+          </Link>
+        </div>
+        <div className="group-action__text">
+          <Link href={url}>opuść</Link>
+        </div>
+      </div>
+    )
   );
 };
 
 Group.Join = GroupJoin;
+
+Group.Leave = GroupLeave;
 
 Group.AdminActions = ({ removeUrl, editUrl, usersUrl }) => (
   <div className="group__admin-actions group-admin-actions">
